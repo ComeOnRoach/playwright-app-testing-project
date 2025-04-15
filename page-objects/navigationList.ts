@@ -1,7 +1,9 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, Response } from "@playwright/test";
 
 class NavigationList {
     private readonly page: Page;
+    readonly goToPage = "http://localhost:4200/";
+    readonly goToGlobalSqaDemo: Promise<Response>;
     readonly formLayotsMenuItem: Locator;
     readonly datepikerMenuItem: Locator;
     readonly smartTableMenuItem: Locator;
@@ -18,26 +20,31 @@ class NavigationList {
     }
 
     async formLayoutPage() {
+        await this.page.goto(this.goToPage)
         await this.selectGroupMenuItem("Forms");
         await this.formLayotsMenuItem.click();
     }
 
     async datepickerPage(){
+        await this.page.goto(this.goToPage);
         await this.selectGroupMenuItem("Forms");
         await this.datepikerMenuItem.click();
     }
     
     async smartTablePage(){
+        await this.page.goto(this.goToPage);
         await this.selectGroupMenuItem("Tables & Data");
         await this.smartTableMenuItem.click();
     }
 
     async toastrPage(){
+        await this.page.goto(this.goToPage);
         await this.selectGroupMenuItem("Modal & Overlays");
         await this.toastrMenuItem.click();
     }
 
     async tooltipPage(){
+        await this.page.goto(this.goToPage);
         await this.selectGroupMenuItem("Modal & Overlays");
         await this.tooltipMenuIterm.click();
     }

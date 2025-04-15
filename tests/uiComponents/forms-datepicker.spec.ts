@@ -1,20 +1,19 @@
-import {test, expect} from '@playwright/test';
-import DatepickerPage from '../../page-objects/datepikerPage';
+import {test} from '@playwright/test';
+import PageManager from '../../page-objects/pageManager';
 
 test.describe("Forms => Datepicker => Common Datepicker", () => {
     test.beforeEach(async ({page}) => {
-        await page.goto("http://localhost:4200");
-        await page.getByRole('link', {name: "Forms"}).click();
-        await page.getByRole("link", {name: "Datepicker"}).click();
+        const pm = new PageManager(page);
+        await pm.navigateTo().datepickerPage();
     })
 
     test("Forms => Datepicker => Common Datepicker => X day before current day", async ({page}) => {
-        const onDatepickerPage = new DatepickerPage(page);
-        await onDatepickerPage.selectCommonDatepickerDateFromToday(-40);
+        const pm = new PageManager(page);
+        await pm.onDatepickerPage().selectCommonDatepickerDateFromToday(-40);
     })
 
     test("Forms => Datepicker => Datepicker With Range => X day before current day", async ({ page }) => {
-        const onDatepickerPage = new DatepickerPage(page);
-        await onDatepickerPage.selectDatepickerWithRangeDateFromToday(-40, 30);
+        const pm = new PageManager(page);
+        await pm.onDatepickerPage().selectDatepickerWithRangeDateFromToday(-40, 30);
     })
 })

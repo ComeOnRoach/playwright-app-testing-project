@@ -1,28 +1,22 @@
 import { test } from "@playwright/test";
-import NavigationList from "../../page-objects/navigationList";
-import FormLayoutsPage from "../../page-objects/formLayoutsPage";
+import PageManager from "../../page-objects/pageManager";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200");
+    const pm = new PageManager(page);
+    await pm.navigateTo().formLayoutPage();
 })
 
 test("Forms => Form Layouts => Inline form", async ({ page }) => {
-    const navigateTo = new NavigationList(page);
-    const formLayouts = new FormLayoutsPage(page);
-    await navigateTo.formLayoutPage();
-    await formLayouts.submitInlineFormWithNameEmailCheckbox("Oleks", "Inline.test.odro@gmai.com", false);
+    const pm = new PageManager(page);
+    await pm.onFormLayoutsPage().submitInlineFormWithNameEmailCheckbox("Oleks", "Inline.test.odro@gmai.com", false);
 })
 
 test("Forms => Form Layouts => Using the Grid", async ({ page }) => {
-    const navigateTo = new NavigationList(page);
-    const formLayouts = new FormLayoutsPage(page);
-    await navigateTo.formLayoutPage();
-    await formLayouts.submitUsingTheGridFormWithCredentialsAndSelectOption("test.odro@gmai.com", "6546", "Disabled Option");
+    const pm = new PageManager(page);
+    await pm.onFormLayoutsPage().submitUsingTheGridFormWithCredentialsAndSelectOption("test.odro@gmai.com", "6546", "Disabled Option");
 })
 
 test("Forms => Form Layouts => Basic Form", async ({ page }) => {
-    const navigateTo = new NavigationList(page);
-    const formLayouts = new FormLayoutsPage(page);
-    await navigateTo.formLayoutPage();
-    await formLayouts.submitBasicFormEmailPasswordCheckbox("Basic.test.odro@gmai.com", "65dfdsfs46", true);
+    const pm = new PageManager(page);
+    await pm.onFormLayoutsPage().submitBasicFormEmailPasswordCheckbox("Basic.test.odro@gmai.com", "65dfdsfs46", true);
 })

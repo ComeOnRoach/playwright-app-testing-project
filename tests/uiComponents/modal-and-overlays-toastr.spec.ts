@@ -1,11 +1,10 @@
 import { test, expect } from "@playwright/test";
+import PageManager from "../../page-objects/pageManager";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200");
-    await page.getByRole('link', { name: "Modal & Overlays" }).click();
-    await page.getByRole('link', { name: "Toastr" }).click();
+    const pm = new PageManager(page);
+    await pm.navigateTo().toastrPage();
 })
-
 
 test.describe("Modal & Overlays => Toastr => Toaster configuration => Position button", () => {
 

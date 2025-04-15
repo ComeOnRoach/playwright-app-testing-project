@@ -1,9 +1,9 @@
 import { test, expect } from "@playwright/test";
+import PageManager from "../../page-objects/pageManager";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200");
-    await page.getByRole('link', { name: "Modal & Overlays" }).click();
-    await page.getByRole('link', { name: "Tooltip" }).click();
+    const pm = new PageManager(page);
+    await pm.navigateTo().tooltipPage();
 })
 
 test.describe("Modal & Overlays => Tooltip", ()=> {

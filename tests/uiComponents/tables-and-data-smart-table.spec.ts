@@ -1,11 +1,10 @@
 import {test, expect} from "@playwright/test";
-import { refCount } from "rxjs/operators";
+import PageManager from "../../page-objects/pageManager";
 
 test.describe("Tables & Data => Smart Table", () => {
     test.beforeEach( async ({page}) => {
-        await page.goto("http://localhost:4200")
-        await page.getByRole("link", { name: "Tables & Data" }).click();
-        await page.getByRole("link", { name: "Smart Table" }).click();
+        const pm = new PageManager(page);
+        pm.navigateTo().smartTablePage();
     })
 
     test ("Smart Table => Delete First Row", async({page}) => {

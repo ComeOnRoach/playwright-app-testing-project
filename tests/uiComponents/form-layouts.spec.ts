@@ -1,11 +1,9 @@
 import { test, expect } from "@playwright/test"
-import NavigationList from "../../page-objects/navigationList";
+import PageManager from "../../page-objects/pageManager";
 
 test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200/");
-    await page.getByRole("link", { name: 'Forms' }).click();
-    await page.getByRole("link", { name: 'Form Layout' }).click();
-
+    const pm = new PageManager(page);
+    await pm.navigateTo().formLayoutPage();
 })
 
 test("Inline form", async ({ page }) => {

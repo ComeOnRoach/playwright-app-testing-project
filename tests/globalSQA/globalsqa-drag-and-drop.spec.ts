@@ -6,7 +6,6 @@ test.describe("GlobalSQA => Drag and Drop", () => {
     })
 
     test("GlobalSQA => Drag and Drop => iframe", async ({page}) => {
-        // const iframe = page.locator(".resp-tabs-list iframe");
         const frame = page.frameLocator('iframe[class="demo-frame lazyloaded"]');
         const trash = frame.locator("#trash");
         const welcomeConsentBtn = page.locator('.fc-dialog-container [aria-label="Consent"]');

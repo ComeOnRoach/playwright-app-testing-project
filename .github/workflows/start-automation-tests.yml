@@ -17,5 +17,5 @@ jobs:
             - name: 🛠 Build Angular app
               run: npm run build
             - name: Run Tests
-              run: npx playwright test "tests/globalSQA/globalsqa-drag-and-drop.spec.ts" --project=chromium
+              run: npx playwright test "tests/uiComponents/" --project=chromium
  

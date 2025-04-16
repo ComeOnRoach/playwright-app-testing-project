@@ -9,6 +9,6 @@ jobs:
             - name: Install Playwright
               run: npm init playwright@latest --force
             - name: Install Dependencies
-              run: mpm ci
+              run: npm ci
             - name: Run Tests
               run: npm test

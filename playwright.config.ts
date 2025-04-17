@@ -32,6 +32,13 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  webServer: {
+    command: 'npm run start', // або 'ng serve' якщо Angular CLI
+    url: 'http://localhost:4200',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000, // 2 хв
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {

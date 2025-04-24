@@ -9,35 +9,39 @@ class DatepickerPage{
     }
 
     /**
-     * 
-     * @param numberOfDaysFromToday
-     * Enter a positive or negative integer indicating the number of days from today (e.g., -5 for 5 days ago, 3 for 3 days from now).
-     */
+    * Selects a date from the "Common Datepicker" based on a number of days from today.
+    *
+    * @param numberOfDaysFromToday - A positive or negative integer indicating the number of days from today.
+    * For example: `-5` means 5 days ago, `3` means 3 days in the future.
+    */
     async selectCommonDatepickerDateFromToday(numberOfDaysFromToday: number,){
         const formSelector = this.page.locator("nb-card", { hasText: "Common Datepicker" }).getByRole('textbox');
-        const date = new Date();
+        const baseDate = new Date();
 
-        await this.daySelector(numberOfDaysFromToday, "Common Datepicker", date);
+        await this.daySelector(numberOfDaysFromToday, "Common Datepicker", baseDate);
         const expectedDate = await this.getExpectedDate(numberOfDaysFromToday, "Common Datepicker");
 
         await expect(formSelector).toHaveValue(expectedDate);
     }
     
     /**
-    * 
-    * @param {number} startDayNumberOfDaysFromToday - A positive or negative integer representing the number of days from today. For example, -5 indicates 5 days ago and 3 indicates 3 days from now.
-    * @param {number} endDayNumberOfDaysFromStartDay - A positive or negative integer representing the number of days from the start day. For example, -3 indicates 3 days before the start day, and 4 indicates 4 days after the start day.
+    * Selects a date range in the "Datepicker With Range" component based on the provided offsets.
+    *
+    * @param startOffset - Number of days from today for the start date.
+    *                      For example: -5 means 5 days ago, 3 means 3 days from now.
+    * @param endOffsetFromStart - Number of days from the start date for the end date.
+    *                              For example: -3 means 3 days before start, 4 means 4 days after start.
     */
-    async selectDatepickerWithRangeDateFromToday(startDayNumberOfDaysFromToday: number, endDayNumberOfDaysFromStartDay: number){
-        const datepickerWithRange = this.page.locator("nb-card", { hasText: "Datepicker With Range" }).getByRole("textbox");
-        const expectedDate = await this.getExpectedDate(startDayNumberOfDaysFromToday, "Datepicker With Range", endDayNumberOfDaysFromStartDay);
+    async selectDatepickerWithRangeDateFromToday(startOffset: number, endOffsetFromStart: number){
+        const datepickerInput = this.page.locator("nb-card", { hasText: "Datepicker With Range" }).getByRole("textbox");
+        const expectedRange = await this.getExpectedDate(startOffset, "Datepicker With Range", endOffsetFromStart);
         const date = new Date();
         
-        await datepickerWithRange.click();
-        await this.daySelector(startDayNumberOfDaysFromToday, "Datepicker With Range", date);
-        await this.daySelector(endDayNumberOfDaysFromStartDay, "Datepicker With Range", date);
+        await datepickerInput.click();
+        await this.daySelector(startOffset, "Datepicker With Range", date);
+        await this.daySelector(endOffsetFromStart, "Datepicker With Range", date);
 
-        await expect(datepickerWithRange).toHaveValue(expectedDate);
+        await expect(datepickerInput).toHaveValue(expectedRange);
     }
 
     private async daySelector(numberOfDays: number, datepickerName: string, date: Date){

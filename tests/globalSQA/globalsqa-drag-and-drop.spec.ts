@@ -1,8 +1,9 @@
-import {test, expect} from "@playwright/test";
+import {expect} from "@playwright/test";
+import {test} from "../../test-variables";
 
 test.describe("GlobalSQA => Drag and Drop", () => {
-    test.beforeEach(async ({page}) => {
-        await page.goto("https://www.globalsqa.com/demo-site/draganddrop/");
+    test.beforeEach(async ({page, globalsQAUrl}) => {
+        await page.goto(globalsQAUrl);
     })
 
     test("GlobalSQA => Drag and Drop => iframe", async ({page}) => {

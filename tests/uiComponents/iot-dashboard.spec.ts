@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("IoT Dashboard => Temperature", () => {
     test.beforeEach(async ({page}) => {
-        await page.goto("http://localhost:4200");
+        await page.goto(process.env.URL);
     })
 
     test("IoT Dashboard => Temperature => 30C", async ({page}) => {

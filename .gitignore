@@ -15,6 +15,9 @@
 .settings/
 *.sublime-workspace
 
+# env variables
+.env
+
 #course
 course.js
 

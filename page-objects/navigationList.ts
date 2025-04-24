@@ -2,7 +2,7 @@ import { Locator, Page, Response } from "@playwright/test";
 
 class NavigationList {
     private readonly page: Page;
-    readonly goToPage = "http://localhost:4200/";
+    readonly goToPage = "/";
     readonly goToGlobalSqaDemo: Promise<Response>;
     readonly formLayotsMenuItem: Locator;
     readonly datepikerMenuItem: Locator;
